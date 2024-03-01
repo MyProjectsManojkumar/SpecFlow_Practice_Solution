@@ -1,4 +1,4 @@
-﻿Feature: Opening Links
+﻿Feature: Opening Links of Page
 
 @mytag
 Scenario: Links - A/B Testing
