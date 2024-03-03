@@ -4,6 +4,7 @@ using BoDi;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using SpecFlowProjectDemo.Utlities;
 using TechTalk.SpecFlow;
 using Feature = AventStack.ExtentReports.Gherkin.Model.Feature;
@@ -44,16 +45,24 @@ namespace SpecFlowProjectDemo.Hooks
             Console.WriteLine("Running after feature...");
         }
         public IWebDriver driver;
-        [BeforeScenario]
-        public void FirstBeforeScenario(ScenarioContext scenarioContext)
+        public IWebDriver setupDriver()
         {
             if (TestContext.Parameters["browser"].ToString().Equals("chrome"))
             {
                 driver = new ChromeDriver();
             }
-            
-            container.RegisterInstanceAs<IWebDriver>(driver);
+            else if (TestContext.Parameters["browser"].ToString().Equals("edge"))
+            {
+                driver = new EdgeDriver();
+            }
 
+            return driver;
+        }
+        [BeforeScenario]
+        public void FirstBeforeScenario(ScenarioContext scenarioContext)
+        {            
+            setupDriver();
+            container.RegisterInstanceAs<IWebDriver>(driver);
             scenario = feature.CreateNode<Scenario>(scenarioContext.ScenarioInfo.Title);
         }
 
