@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 using BoDi;
+using log4net.Config;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -13,8 +14,7 @@ namespace SpecFlowProjectDemo.Hooks
 {
     [Binding]
     public  class Hooks1 : reports
-    {
-        
+    {        
         public readonly IObjectContainer container;
         public Hooks1(IObjectContainer _container) 
         { 
