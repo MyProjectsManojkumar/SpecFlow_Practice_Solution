@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using SpecFlowProjectDemo.PageObjects;
@@ -20,7 +21,8 @@ namespace SpecFlowProjectDemo.StepDefinitions
         [Given("I open the browser")]
         public void GivenTheFirstNumberIs()
         {
-            driver.Url = "https://the-internet.herokuapp.com/";
+            
+            driver.Url = TestContext.Parameters["URL"].ToString();
         }
 
         [When(@"click on the link - '([^']*)'")]
