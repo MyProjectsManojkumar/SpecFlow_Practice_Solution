@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,10 @@ namespace SpecFlow_Practice_Solution.PageObjects
         {
             driver.FindElement(By.Name("username")).SendKeys(user);
             driver.FindElement(By.Name("password")).SendKeys(pwd);
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            Thread.Sleep(1000);
+            string value = "You logged into a secure area!";
+            Assert.True(driver.FindElement(By.XPath("//div[@class='flash success']")).Text.Contains(value));
         }
     }
 }
